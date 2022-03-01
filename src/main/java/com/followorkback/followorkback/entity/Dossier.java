@@ -20,19 +20,18 @@ public abstract class Dossier extends BaseTime {
     @Id
     private String genericCode;
 
-    private String unit;
+    private String provenance;
 
     @Column(unique = true)
     private String name;
-
-    private long neededAmount;
+    private String origin;
+    private String first_cote;
     private String recipients;
     private String domain;
+    private String deliverables;
     private Date start_date;
     private Date expected_end_date;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name="analyst_id", insertable=true, updatable=true, nullable=false)
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private User userAnalyst;

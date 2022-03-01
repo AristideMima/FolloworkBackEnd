@@ -17,12 +17,10 @@ import java.util.Date;
 public class CreditAnalysis extends Analysis {
 
     @Id
-    @OneToOne
-    private Credit credit;
+    private String creditGeneric;
 
     @Id
-    @OneToOne
-    private User user;
+    private String username;
 
     private Date date_comity_great;
     private Date date_transmit;

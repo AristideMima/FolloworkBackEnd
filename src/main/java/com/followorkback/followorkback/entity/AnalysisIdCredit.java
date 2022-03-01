@@ -1,14 +1,19 @@
 package com.followorkback.followorkback.entity;
 
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
+@NoArgsConstructor
 public class AnalysisIdCredit implements Serializable {
-    private Credit credit;
-    private User user;
+    private String creditGeneric;
 
-    public AnalysisIdCredit(Credit credit, User user){
-        this.credit = credit;
-        this.user =  user;
+    private String username;
+
+
+    public AnalysisIdCredit(String creditGeneric, String username){
+        this.creditGeneric = creditGeneric;
+        this.username =  username;
     }
 
 }

@@ -10,9 +10,5 @@ import java.util.UUID;
 
 public interface CreditService {
     Credit saveCredit(Credit credit);
-    Credit updateCredit(Etude credit);
-    Boolean deleteCredit(UUID uuid);
-    Credit getCredit(UUID uuid);
-    void addSupportToCredit(User user);
     Collection<Credit> getAllCredits(int limit);
 }

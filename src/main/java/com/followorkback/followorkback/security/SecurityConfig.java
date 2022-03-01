@@ -43,20 +43,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         customAuthenticationFilter.setFilterProcessesUrl("/api/login");
         http.csrf().disable();
         http.cors().and();
+
+        // user routes
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers( "/api/login/**", "/token/refresh?**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
         http.authorizeRequests().antMatchers( "/api/usersByRole/{userRole}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
-        http.authorizeRequests().antMatchers( "/api/etude/save/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
-        http.authorizeRequests().antMatchers( "/api/etude/update/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
-        http.authorizeRequests().antMatchers( "/api/etude/analysis/update/{username}/{action}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
-//        http.authorizeRequests().antMatchers(GET, "/login").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/users/**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
-        http.authorizeRequests().antMatchers(GET, "/api/etude/etudes**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
-        http.authorizeRequests().antMatchers(DELETE, "/api/etude/delete/{genericCode}/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
-        http.authorizeRequests().antMatchers(GET, "/api/etude/etudes/analyst/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
         http.authorizeRequests().antMatchers(POST, "/api/user/edit/**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN");
         http.authorizeRequests().antMatchers(POST, "/api/user/delete/**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN");
         http.authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/users/**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+
+
+        // Etudes routes
+        http.authorizeRequests().antMatchers( "/api/etude/save/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers( "/api/etude/update/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers( "/api/etude/analysis/update/{username}/{action}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers( "/api/etude/manager/update/{username}/{action}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/etude/monitor/{genericCode}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/etude/etudes**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(DELETE, "/api/etude/delete/{genericCode}/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/etude/etudes/analyst/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/etude/etudes/manager/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+
+        // Credit routes
+        http.authorizeRequests().antMatchers( "/api/credit/save/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers( "/api/credit/update/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers( "/api/credit/analysis/update/{username}/{action}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers( "/api/credit/manager/update/{username}/{action}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/credit/monitor/{genericCode}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/credit/etudes**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(DELETE, "/api/credit/delete/{genericCode}/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/credit/credits/analyst/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/credit/credits/manager/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+
+
         http.authorizeHttpRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -51,10 +51,7 @@ public class EtudeServiceImpl implements EtudeService {
 
     @Override
     public Collection<Etude> getAllEtudes(int limit) {
-        log.info("Fetching all etudes:  {}", etudeRepository);
         Collection<Etude> datas = etudeRepository.findAll(PageRequest.of(0, limit)).toList();
-        log.info("Datas {}", datas);
-
         return datas;
     }
 }

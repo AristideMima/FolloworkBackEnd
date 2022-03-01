@@ -23,4 +23,12 @@ public interface EtudeRepository extends JpaRepository<Etude, String> {
 
     @Query(value = "Select e, b from Etude e left join EtudeAnalysis b on e.genericCode = b.etudeGeneric where b.username = :username order by b.updatedAt desc ")
     List<?> findAnalystJoinAnalysis(@Param("username") String username);
+
+    @Query(value = "Select m, e from Monitor m left join Etude e on m.dossierId = e.genericCode where m.dossierId = :genericCode order by m.updatedAt desc ")
+    List<?> findGenericJoinMonitor(@Param("genericCode") String genericCode);
+
+    @Query(value = "Select e, b from Etude e left join EtudeAnalysis b on e.genericCode = b.etudeGeneric where e.userManager.username = :username order by b.updatedAt desc ")
+    List<?> findAnalystJoinManager(@Param("username") String username);
+
+
 }

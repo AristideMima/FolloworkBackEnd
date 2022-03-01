@@ -11,7 +11,4 @@ public interface EtudeAnalysisRepository extends JpaRepository<EtudeAnalysis, Lo
       EtudeAnalysis findByEtudeGeneric(String etudeGeneric);
       @Transactional
       long deleteAllByEtudeGeneric(String etudeGeneric);
-//    EtudeAnalysis saveEtudeAnalysis(EtudeAnalysis etudeanalysis);
-//    EtudeAnalysis findBydossier_uuidAndusername_analyst(UUID dossier_uuid, String username_analyst);
-//    EtudeAnalysis findBydossier_uuidAndusername_manager(UUID dossier_uuid, String username_manager);
 }

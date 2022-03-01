@@ -19,12 +19,13 @@ public abstract class Analysis extends BaseTime {
     private Date date_close;
     private Date date_comity_dri;
     private Date date_init_close;
+    private Date date_init_suspend;
+    private Date date_suspend;
     private long amount_given;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
     private String link;
-    private String deliverables;
     private String perspectives;
 }

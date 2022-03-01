@@ -12,10 +12,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @IdClass(MonitorId.class)
 public class Monitor extends BaseTime {
-    @Id
+
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String dossierId;
 
-    @Id
     private String username;
 
     private String comment;

@@ -29,25 +29,24 @@ public class FolloworkbackApplication {
 //	@Bean
 //	CommandLineRunner run(UserService userService){
 //		return args -> {
-////			userService.saveRole(new Role(null, "ROLE_USER"));
-////			userService.saveRole(new Role(null, "ROLE_ADMIN"));
-////			userService.saveRole(new Role(null, "ROLE_MANAGER"));
-////			userService.saveRole(new Role(null, "ROLE_ANALYST"));
+//			userService.saveRole(new Role(null, "ROLE_USER"));
+//			userService.saveRole(new Role(null, "ROLE_ADMIN"));
+//			userService.saveRole(new Role(null, "ROLE_MANAGER"));
+//			userService.saveRole(new Role(null, "ROLE_ANALYST"));
 //
-//			userService.saveUser(new User(null, "Mima", "Aristide", "aristide@gmail.com", "aristidemima", "aris237", new HashSet<>()));
-//			userService.saveUser(new User(null, "Nana", "Aristide", "abena@gmail.com", "calotest", "aris237", new HashSet<>()));
-//			userService.saveUser(new User(null, "Mbappe", "Aristide", "manga@gmail.com", "mbappenana", "aris237", new HashSet<>()));
-//			userService.saveUser(new User(null, "Mbappe", "Aristide", "mapemba@gmail.com", "manager_one", "aris237", new HashSet<>()));
-//
-//
-//			userService.addRoleToUser("aristidemima", "ROLE_ANALYST");
-////			userService.addRoleToUser("calotest", "ROLE_USER");
-////			userService.addRoleToUser("mbappenana", "ROLE_MANAGER");
-////			userService.addRoleToUser("mbappenanaigoire", "ROLE_ANALYST");
+//			userService.saveUser(new User(null, "MISSITANE", "ARISTIDE MISSITANE", "mathieu_missitane@afrilandfirstbank.com", "mathieu_missitane", "mathieu_missitane", new HashSet<>()));
+//			userService.saveUser(new User(null, "PONE", "GILLES", "gilles_pone@afrilandfirstbank.com", "gilles_pone", "gilles_pone", new HashSet<>()));
+//			userService.saveUser(new User(null, "NDE OUFO", "ARCHIMEDE", "archimede_ndearchimede_nde@afrilandfirstbank.com", "archimede_nde", "archimede_nde", new HashSet<>()));
+//			userService.saveUser(new User(null, "DOPGANG", "Wilfried", "wilfried_dopgang@gmail.com", "wilfried_dopgang", "wilfried_dopgang", new HashSet<>()));
 //
 //
-//
+//			userService.addRoleToUser("mathieu_missitane", "ROLE_ANALYST");
+//			userService.addRoleToUser("mathieu_missitane", "ROLE_MANAGER");
+//			userService.addRoleToUser("archimede_nde", "ROLE_MANAGER");
+//			userService.addRoleToUser("gilles_pone", "ROLE_ANALYST");
+//			userService.addRoleToUser("wilfried_dopgang", "ROLE_ANALYST");
 //
 //		};
 //	}
 }
+ 

@@ -16,7 +16,5 @@ import java.util.Date;
 @DiscriminatorValue("etude")
 @Table(name = "Etude")
 public class Etude extends Dossier {
-    private String origin;
-    private String first_cote;
     private String type;
 }

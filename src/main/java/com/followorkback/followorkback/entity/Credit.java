@@ -16,6 +16,7 @@ import java.util.Date;
 @DiscriminatorValue("credit")
 @Table(name = "Credit")
 public class Credit extends Dossier {
+    private long neededAmount;
     private Date ack_date;
     private String needed_reason;
 }
