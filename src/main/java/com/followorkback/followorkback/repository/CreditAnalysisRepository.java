@@ -3,6 +3,7 @@ package com.followorkback.followorkback.repository;
 import com.followorkback.followorkback.entity.Credit;
 import com.followorkback.followorkback.entity.CreditAnalysis;
 import com.followorkback.followorkback.entity.EtudeAnalysis;
+import com.followorkback.followorkback.entity.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +16,8 @@ public interface CreditAnalysisRepository extends JpaRepository<CreditAnalysis, 
     CreditAnalysis findByCreditGeneric(String etudeGeneric);
     @Transactional
     long deleteAllByCreditGeneric(String etudeGeneric);
+
+    long countAllByStatus(Status status);
+    long countAllByStatusAndUsername(Status status, String username);
+    long countAllByUsername(String username);
 }

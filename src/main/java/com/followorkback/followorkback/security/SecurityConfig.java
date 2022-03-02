@@ -64,6 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(DELETE, "/api/etude/delete/{genericCode}/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
         http.authorizeRequests().antMatchers(GET, "/api/etude/etudes/analyst/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
         http.authorizeRequests().antMatchers(GET, "/api/etude/etudes/manager/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/etude/stats/all**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/etude/stats/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
 
         // Credit routes
         http.authorizeRequests().antMatchers( "/api/credit/save/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
@@ -75,7 +77,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(DELETE, "/api/credit/delete/{genericCode}/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
         http.authorizeRequests().antMatchers(GET, "/api/credit/credits/analyst/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
         http.authorizeRequests().antMatchers(GET, "/api/credit/credits/manager/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/credit/stats/{username}**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
+        http.authorizeRequests().antMatchers(GET, "/api/credit/stats/all**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
 
+        // Global
+        http.authorizeRequests().antMatchers(GET, "/api/etude/name**").hasAnyAuthority( "ROLE_MANAGER","ROLE_ADMIN", "ROLE_ANALYST");
 
         http.authorizeHttpRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);

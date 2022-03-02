@@ -10,6 +10,7 @@ import com.followorkback.followorkback.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,43 @@ public class CreditController {
     private final CreditRepository creditRepository;
     private final MonitorRepository monitorRepository;
     private final MonitorServiceImpl monitorService;
+
+
+    @GetMapping("/stats/all")
+    public ResponseEntity<?> getCreditsStatsAll(){
+
+        long total = creditAnalysisRepository.count();
+        long init_all = creditAnalysisRepository.countAllByStatus(Status.INIT_DEMAND);
+        long progress = creditAnalysisRepository.countAllByStatus(Status.IN_PROGRESS);
+        long close = creditAnalysisRepository.countAllByStatus(Status.CLOSE_REJECT) +
+                creditAnalysisRepository.countAllByStatus(Status.CLOSE_SUCCESS);
+
+        JSONObject allStats = new JSONObject();
+        allStats.put("total", total);
+        allStats.put("init_all", init_all);
+        allStats.put("progress", progress);
+        allStats.put("close", close);
+
+        return ResponseEntity.ok().body(allStats);
+    }
+
+    @GetMapping("/stats/{username}")
+    public ResponseEntity<?> getCreditsStatsAll(@PathVariable String username){
+        long total = creditAnalysisRepository.countAllByUsername(username);
+        long init_all = creditAnalysisRepository.countAllByStatusAndUsername(Status.INIT_DEMAND, username);
+        long progress = creditAnalysisRepository.countAllByStatusAndUsername(Status.IN_PROGRESS, username);
+        long close = creditAnalysisRepository.countAllByStatusAndUsername(Status.CLOSE_REJECT, username) +
+                creditAnalysisRepository.countAllByStatusAndUsername(Status.CLOSE_SUCCESS, username);
+
+        JSONObject allStats = new JSONObject();
+        allStats.put("total", total);
+        allStats.put("init_all", init_all);
+        allStats.put("progress", progress);
+        allStats.put("close", close);
+
+        return ResponseEntity.ok().body(allStats);
+    }
+
 
     @GetMapping("/credits")
     public ResponseEntity<List<?>> getCredits(){

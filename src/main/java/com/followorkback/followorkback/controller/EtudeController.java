@@ -8,6 +8,7 @@ import com.followorkback.followorkback.service.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("api/etude")
@@ -37,6 +40,50 @@ public class EtudeController {
 
 
         return ResponseEntity.ok().body(etudeRepository.findAllJoinAnalysis());
+    }
+
+
+    @GetMapping("/stats/all")
+    public ResponseEntity<?> getCreditsStatsAll(){
+
+        long total = etudeAnalysisRepository.count();
+        long init_all = etudeAnalysisRepository.countAllByStatus(Status.INIT_DEMAND);
+        long progress = etudeAnalysisRepository.countAllByStatus(Status.IN_PROGRESS);
+        long close = etudeAnalysisRepository.countAllByStatus(Status.CLOSE_REJECT) + etudeAnalysisRepository.countAllByStatus(Status.CLOSE_SUCCESS);
+
+        JSONObject allStats = new JSONObject();
+        allStats.put("total", total);
+        allStats.put("init_all", init_all);
+        allStats.put("progress", progress);
+        allStats.put("close", close);
+
+        return ResponseEntity.ok().body(allStats);
+    }
+
+    @GetMapping("/stats/{username}")
+    public ResponseEntity<?> getCreditsStatsAll(@PathVariable String username){
+        long total = etudeAnalysisRepository.countAllByUsername(username);
+        long init_all = etudeAnalysisRepository.countAllByStatusAndUsername(Status.INIT_DEMAND, username);
+        long progress = etudeAnalysisRepository.countAllByStatusAndUsername(Status.IN_PROGRESS, username);
+        long close = etudeAnalysisRepository.countAllByStatusAndUsername(Status.CLOSE_REJECT, username) +
+                etudeAnalysisRepository.countAllByStatusAndUsername(Status.CLOSE_SUCCESS, username);
+
+        JSONObject allStats = new JSONObject();
+        allStats.put("total", total);
+        allStats.put("init_all", init_all);
+        allStats.put("progress", progress);
+        allStats.put("close", close);
+
+        return ResponseEntity.ok().body(allStats);
+    }
+
+    @GetMapping("/names")
+    public ResponseEntity<List<?>> getAllNames(){
+        List<?> allNamesEtudes = etudeRepository.findAllDossierNamesEtude();
+        List<?> allNamesCredits = etudeRepository.findAllDossierNamesCredit();
+        List<?> allNames = Stream.concat(allNamesEtudes.stream(), allNamesCredits.stream()).collect(Collectors.toList());
+
+        return ResponseEntity.ok().body(allNames);
     }
 
     @GetMapping("/etudes/analyst/{username}")
