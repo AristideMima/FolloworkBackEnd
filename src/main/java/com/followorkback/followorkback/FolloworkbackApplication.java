@@ -41,6 +41,7 @@ public class FolloworkbackApplication {
 //
 //
 //			userService.addRoleToUser("mathieu_missitane", "ROLE_ANALYST");
+//			userService.addRoleToUser("mathieu_missitane", "ROLE_ADMIN");
 //			userService.addRoleToUser("mathieu_missitane", "ROLE_MANAGER");
 //			userService.addRoleToUser("archimede_nde", "ROLE_MANAGER");
 //			userService.addRoleToUser("gilles_pone", "ROLE_ANALYST");

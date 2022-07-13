@@ -3,7 +3,6 @@ package com.followorkback.followorkback.filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.application.Application;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -54,7 +53,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 String username = authReq.getUsername();
                 String password = authReq.getPassword();
 
-                log.info("username: {}, password: {}", authReq.getUsername(), authReq.getPassword());
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
 
                 return authenticationManager.authenticate(authenticationToken);
